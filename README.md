@@ -285,7 +285,7 @@ The project was implemented using the following tools and libraries:
 ### 1. Clone the Repository
 
 ```bash
-git clone <https://github.com/ARraj14/Titanic_Data_Cleaning_Project.git>
+git clone https://github.com/ARraj14/Titanic_Data_Cleaning_Project.git
 ```
 
 Move into the project directory:
