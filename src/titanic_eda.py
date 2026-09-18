@@ -366,3 +366,230 @@ plt.savefig(
 
 plt.show()
 plt.close()
+
+# Bivariate Analysis
+
+print("\n" + "=" * 60)
+print("BIVARIATE ANALYSIS")
+print("=" * 60)
+
+# 1. Survival rate by sex
+
+survival_by_sex = df.groupby("Sex")["Survived"].mean().mul(100).round(2)
+
+print("\nSurvival rate by sex (%):")
+print(survival_by_sex)
+
+
+plt.figure(figsize=(7, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="Sex",
+    y="Survived",
+    errorbar=None,
+)
+
+plt.title("Survival Rate by Sex")
+plt.xlabel("Sex")
+plt.ylabel("Survival Rate")
+plt.ylim(0, 1)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.2f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_sex.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 2. Survival rate by passenger class
+
+survival_by_class = df.groupby("Pclass")["Survived"].mean().mul(100).round(2)
+
+print("\nSurvival rate by passenger class (%):")
+print(survival_by_class)
+
+
+plt.figure(figsize=(7, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="Pclass",
+    y="Survived",
+    errorbar=None,
+)
+
+plt.title("Survival Rate by Passenger Class")
+plt.xlabel("Passenger Class")
+plt.ylabel("Survival Rate")
+plt.ylim(0, 1)
+
+plt.xticks(
+    [0, 1, 2],
+    ["1st Class", "2nd Class", "3rd Class"],
+)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.2f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_class.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 3. Survival rate by embarkation port
+
+survival_by_embarked = df.groupby("Embarked")["Survived"].mean().mul(100).round(2)
+
+print("\nSurvival rate by embarkation port (%):")
+print(survival_by_embarked)
+
+
+plt.figure(figsize=(7, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="Embarked",
+    y="Survived",
+    order=["S", "C", "Q"],
+    errorbar=None,
+)
+
+plt.title("Survival Rate by Embarkation Port")
+plt.xlabel("Embarkation Port")
+plt.ylabel("Survival Rate")
+plt.ylim(0, 1)
+
+plt.xticks(
+    [0, 1, 2],
+    ["Southampton", "Cherbourg", "Queenstown"],
+)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.2f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_embarkation.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 4. Survival by travelling alone
+
+survival_by_alone = df.groupby("IsAlone")["Survived"].mean().mul(100).round(2)
+
+print("\nSurvival rate by travelling status (%):")
+print(survival_by_alone)
+
+
+plt.figure(figsize=(7, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="IsAlone",
+    y="Survived",
+    errorbar=None,
+)
+
+plt.title("Survival Rate: Alone vs With Family")
+plt.xlabel("Travel Status")
+plt.ylabel("Survival Rate")
+plt.ylim(0, 1)
+
+plt.xticks(
+    [0, 1],
+    ["With Family", "Alone"],
+)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.2f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_travel_status.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 5. Survival by cabin information availability
+
+survival_by_cabin = df.groupby("Cabin_known")["Survived"].mean().mul(100).round(2)
+
+print("\nSurvival rate by cabin information availability (%):")
+print(survival_by_cabin)
+
+
+plt.figure(figsize=(7, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="Cabin_known",
+    y="Survived",
+    errorbar=None,
+)
+
+plt.title("Survival Rate by Cabin Information Availability")
+plt.xlabel("Cabin Information")
+plt.ylabel("Survival Rate")
+plt.ylim(0, 1)
+
+plt.xticks(
+    [0, 1],
+    ["Unknown", "Known"],
+)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.2f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_cabin_information.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
