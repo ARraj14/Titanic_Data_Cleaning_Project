@@ -593,3 +593,164 @@ plt.savefig(
 
 plt.show()
 plt.close()
+
+## ~~Numerical Bivariate Analysis~~
+
+# 6. Age and Survival
+
+age_by_survival = (
+    df.groupby("Survived")["Age"]
+    .agg(["count", "mean", "median", "std", "min", "max"])
+    .round(2)
+)
+
+print("\nAge statistical by survival status:")
+print(age_by_survival)
+
+plt.figure(figsize=(8, 5))
+
+sns.boxplot(
+    data=df,
+    x="Survived",
+    y="Age",
+)
+
+plt.title("Age Distribution by Survival Status")
+plt.xlabel("Survival status")
+plt.ylabel("Age")
+
+plt.xticks(
+    [0, 1],
+    ["Did Not Survive", "Survived"],
+)
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "age_by_survival.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 7. Age distribution by survival status
+
+plt.figure(figsize=(9, 5))
+
+sns.histplot(
+    data=df,
+    x="Age",
+    hue="Survived",
+    bins=30,
+    kde=True,
+    element="step",
+    stat="density",
+    common_norm=False,
+)
+
+plt.title("Age Distribution by Survival Status")
+plt.xlabel("Age")
+plt.ylabel("Density")
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "age_survival_distribution.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 8. Fare and survival
+
+fare_by_survival = (
+    df.groupby("Survived")["Fare_capped"]
+    .agg(["count", "mean", "median", "std", "min", "max"])
+    .round(2)
+)
+
+print("\nFare statistics by survival status:")
+print(fare_by_survival)
+
+
+plt.figure(figsize=(8, 5))
+
+sns.boxplot(
+    data=df,
+    x="Survived",
+    y="Fare_capped",
+)
+
+plt.title("Fare Distribution by Survival Status")
+plt.xlabel("Survival Status")
+plt.ylabel("Capped Fare")
+
+plt.xticks(
+    [0, 1],
+    ["Did Not Survive", "Survived"],
+)
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "fare_by_survival.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
+
+# 9. Survival rate by family size
+
+survival_by_family_size = (
+    df.groupby("FamilySize")["Survived"].agg(["count", "mean"]).reset_index()
+)
+
+survival_by_family_size["Survival_Rate"] = (
+    survival_by_family_size["mean"] * 100
+).round(2)
+
+print("\nSurvival rate by family size:")
+print(
+    survival_by_family_size[["FamilySize", "count", "Survival_Rate"]].to_string(
+        index=False
+    )
+)
+
+
+plt.figure(figsize=(9, 5))
+
+ax = sns.barplot(
+    data=survival_by_family_size,
+    x="FamilySize",
+    y="Survival_Rate",
+)
+
+plt.title("Survival Rate by Family Size")
+plt.xlabel("Family Size")
+plt.ylabel("Survival Rate (%)")
+
+plt.ylim(0, 100)
+
+for container in ax.containers:
+    ax.bar_label(
+        container,
+        fmt="%.1f",
+        padding=3,
+    )
+
+plt.tight_layout()
+
+plt.savefig(
+    EDA_OUTPUT_DIR / "survival_by_family_size.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+plt.close()
