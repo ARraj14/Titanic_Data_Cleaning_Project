@@ -1099,7 +1099,7 @@ The final reports are stored in:
 
 ```text
 reports/
-├── Week_1_Data_Cleaning_Report.docx
+├── Week_1_Data_Cleaning_and_Preprocessing_Report.docx
 └── Week_2_Titanic_EDA_Report.docx
 ```
 
