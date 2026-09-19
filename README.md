@@ -1128,7 +1128,7 @@ Titanic_Data_Science_Project/
 │       └── Week 2 EDA figures
 │
 ├── reports/
-│   ├── Week_1_Data_Cleaning_Report.docx
+│   ├── Week_1_Data_Cleaning_and_Preprocessing_Report.docx
 │   └── Week_2_Titanic_EDA_Report.docx
 │
 ├── .gitignore
